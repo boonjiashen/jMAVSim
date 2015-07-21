@@ -24,7 +24,10 @@ public class Simulator {
         // Create world
         world = new World();
         // Set global reference point
-        world.setGlobalReference(new LatLonAlt(55.753395, 37.625427, 0.0));
+        //world.setGlobalReference(new LatLonAlt(55.753395, 37.625427, 0.0));
+
+        // Field north of Medical Sciences Center, Madison, WI
+        world.setGlobalReference(new LatLonAlt(43.076997, -89.408581, 0.0));
 
         MAVLinkSchema schema = new MAVLinkSchema("mavlink/message_definitions/common.xml");
 
@@ -107,7 +110,8 @@ public class Simulator {
 
         // Open ports
         //serialMAVLinkPort.setDebug(true);
-        serialMAVLinkPort.open("/dev/tty.usbmodem1", 230400, 8, 1, 0);
+        //serialMAVLinkPort.open("/dev/tty.usbmodem1", 230400, 8, 1, 0);
+        serialMAVLinkPort.open("/dev/ttyACM0", 230400, 8, 1, 0);
         serialMAVLinkPort.sendRaw("\nsh /etc/init.d/rc.usb\n".getBytes());
         //udpMavLinkPort.setDebug(true);
         udpMavLinkPort.open(new InetSocketAddress("127.0.0.1", 14555), new InetSocketAddress("127.0.0.1", 14550));
